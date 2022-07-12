@@ -26,7 +26,8 @@ The output dictionary contains
 * a\_nan: The neural activity where values that were NaN in either the raw green or red fluorescence are set to NaN
 * m: The motion artifact (time, neurons)
 * g\_raw, r\_raw: the green and red fluorescence input (time, neurons)
-* length\_scale\_a, length\_scale\_m: the timescale of the gaussian process for a and m in units of time indicies
-* variance\_a, variance\_m: the amplitude of a and m
-* variance\_g\_noise, variance\_r\_noise: the amplitude of the channel noise for r and g
+* g\_corrected, r\_corrected: the green and red fluorescence after interpolation and photobleach correction (time, neurons)
+* length\_scale\_a, length\_scale\_m: the timescale of the gaussian process for a and m in units of time indicies (neurons,)
+* variance\_a, variance\_m: the amplitude of a and m (neurons,)
+* variance\_g\_noise, variance\_r\_noise: the amplitude of the channel noise for r and g (neurons,)
 

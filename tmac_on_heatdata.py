@@ -44,6 +44,8 @@ a_nan[nan_loc] = np.array('nan')
 # add the raw red and green to the output variables
 trained_variables['r_raw'] = red
 trained_variables['g_raw'] = green
+trained_variables['r_corrected'] = red_corrected
+trained_variables['g_corrected'] = green_corrected
 trained_variables['a_nan'] = a_nan
 
 # save to matlab format
