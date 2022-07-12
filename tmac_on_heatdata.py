@@ -3,6 +3,7 @@ import tmac.models as tm
 import tmac.preprocessing as tp
 import scipy.io as sio
 import pickle
+import numpy as np
 
 # this script will load in a heatData.mat file output from the 3dbrain pipeline
 # https://github.com/leiferlab/3dbrain
@@ -36,10 +37,14 @@ green_corrected = tp.photobleach_correction(green_interp)
 # run tmac on the red and green channel to extract the activity
 trained_variables = tm.tmac_ac(red_corrected, green_corrected)
 
+nan_loc = np.isnan(red) | np.isnan(green)
+a_nan = trained_variables['a'].copy()
+a_nan[nan_loc] = np.array('nan')
+
 # add the raw red and green to the output variables
 trained_variables['r_raw'] = red
 trained_variables['g_raw'] = green
-
+trained_variables['a_nan'] = a_nan
 
 # save to matlab format
 sio.savemat(tmac_save_path + '.mat', trained_variables)

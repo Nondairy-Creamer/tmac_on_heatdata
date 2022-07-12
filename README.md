@@ -13,7 +13,7 @@ pip install -e .
 In a terminal run
 
 ```
-python tmac_on_heatdata.py <brinascanner folder>
+python tmac_on_heatdata.py <brainscanner folder>
 ```
 
 The script will 
@@ -23,6 +23,7 @@ The script will
 
 The output dictionary contains
 * a: The neural activity (time, neurons)
+* a\_nan: The neural activity where values that were NaN in either the raw green or red fluorescence are set to NaN
 * m: The motion artifact (time, neurons)
 * g\_raw, r\_raw: the green and red fluorescence input (time, neurons)
 * length\_scale\_a, length\_scale\_m: the timescale of the gaussian process for a and m in units of time indicies
