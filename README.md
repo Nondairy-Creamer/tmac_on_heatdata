@@ -2,18 +2,32 @@
 
 ### Installation:
 clone this repo to a directory.
-Navigate to the python project directory in a terminal
 ```
+git clone https://github.com/Nondairy-Creamer/tmac_on_heatdata
+```
+
+Create a virtual environment
+```
+cd tmac_on_heatdata
+python3 -m venv venv
+```
+
+Upgrade pip and install tmac into the virtual environment
+```
+source venv/bin/activate
+pip install --upgrade pip
 git clone https://github.com/Nondairy-Creamer/tmac
 cd tmac
 pip install -e .
 ```
 
 ### Usage:
-In a terminal run
+In a new terminal run
 
 ```
-python tmac_on_heatdata.py <brainscanner folder>
+cd <path_to_this_repo>
+source venv/bin/activate
+python3 tmac_on_heatdata.py <brainscanner folder>
 ```
 
 The script will 
