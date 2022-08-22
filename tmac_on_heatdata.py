@@ -23,8 +23,22 @@ tmac_save_path = folder_path + 'tmac_output'
 
 # load in heatmat data
 heat_data = sio.loadmat(heat_data_path)
-red = heat_data['rRaw'].T
-green = heat_data['gRaw'].T
+red_in = heat_data['rRaw'].T
+green_in = heat_data['gRaw'].T
+
+# remove any unwanted data
+limits = [0, green_in.shape[0]]
+
+if len(sys.argv) > 2:
+    if sys.argv[2] != '-':
+        limits[0] = sys.argv[2]
+
+if len(sys.argv) > 3:
+    if sys.argv[3] != '-':
+        limits[1] = sys.argv[3]
+
+red = red_in[limits[0]:limits[1], :]
+green = green_in[limits[0]:limits[1], :]
 
 # interpolate to get rid of nans in data
 red_interp = tp.interpolate_over_nans(red)[0]
