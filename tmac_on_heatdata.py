@@ -31,11 +31,11 @@ limits = [0, green_in.shape[0]]
 
 if len(sys.argv) > 2:
     if sys.argv[2] != '-':
-        limits[0] = sys.argv[2]
+        limits[0] = int(sys.argv[2])
 
 if len(sys.argv) > 3:
     if sys.argv[3] != '-':
-        limits[1] = sys.argv[3]
+        limits[1] = int(sys.argv[3])
 
 red = red_in[limits[0]:limits[1], :]
 green = green_in[limits[0]:limits[1], :]
