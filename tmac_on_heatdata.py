@@ -61,6 +61,7 @@ trained_variables['g_raw'] = green
 trained_variables['r_corrected'] = red_corrected
 trained_variables['g_corrected'] = green_corrected
 trained_variables['a_nan'] = a_nan
+trained_variables['limits'] = limits
 
 # save to matlab format
 sio.savemat(tmac_save_path + '.mat', trained_variables)
