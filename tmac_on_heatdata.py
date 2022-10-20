@@ -62,7 +62,7 @@ trained_variables['r_corrected'] = red_corrected
 trained_variables['g_corrected'] = green_corrected
 trained_variables['a_nan'] = a_nan
 trained_variables['limits'] = limits
-
+trained_variables['sample_rate'] = 1 / np.mean(np.diff(heat_data['hasPointsTime']))
 # save to matlab format
 sio.savemat(tmac_save_path + '.mat', trained_variables)
 
