@@ -4,6 +4,7 @@ import tmac.preprocessing as tp
 import scipy.io as sio
 import pickle
 import numpy as np
+from pathlib import Path
 
 # this script will load in a heatData.mat file output from the 3dbrain pipeline
 # https://github.com/leiferlab/3dbrain
@@ -15,16 +16,24 @@ import numpy as np
 # get the path from user input
 folder_path = sys.argv[1]
 
-if folder_path[-1] != '/' and folder_path[-1] != '\\':
-    folder_path = folder_path + '/'
+if folder_path.endswith('/') or folder_path.endswith('\\'):
+    folder_path = folder_path[:-1]
 
-heat_data_path = folder_path + 'heatData.mat'
-tmac_save_path = folder_path + 'tmac_output'
+folder_path = Path(folder_path)
+
+heat_data_path = folder_path / 'heatData.mat'
+tmac_save_path = folder_path / 'tmac_output'
 
 # load in heatmat data
-heat_data = sio.loadmat(heat_data_path)
-red_in = heat_data['rRaw'].T
-green_in = heat_data['gRaw'].T
+if heat_data_path.is_file():
+    heat_data = sio.loadmat(heat_data_path)
+    red_in = heat_data['rRaw'].T
+    green_in = heat_data['gRaw'].T
+    sample_rate = 1 / np.mean(np.diff(heat_data['hasPointsTime'][:, 0]))
+else:
+    red_in = np.loadtxt(folder_path / 'red.txt')
+    green_in = np.loadtxt(folder_path / 'green.txt')
+    sample_rate = 6
 
 # remove any unwanted data
 limits = [0, green_in.shape[0]]
@@ -62,7 +71,7 @@ trained_variables['r_corrected'] = red_corrected
 trained_variables['g_corrected'] = green_corrected
 trained_variables['a_nan'] = a_nan
 trained_variables['limits'] = limits
-trained_variables['sample_rate'] = 1 / np.mean(np.diff(heat_data['hasPointsTime'][:, 0]))
+trained_variables['sample_rate'] = sample_rate
 # save to matlab format
 sio.savemat(tmac_save_path + '.mat', trained_variables)
 
