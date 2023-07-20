@@ -73,9 +73,9 @@ trained_variables['a_nan'] = a_nan
 trained_variables['limits'] = limits
 trained_variables['sample_rate'] = sample_rate
 # save to matlab format
-sio.savemat(tmac_save_path + '.mat', trained_variables)
+sio.savemat(tmac_save_path.with_suffix('.mat'), trained_variables)
 
 # save to pickle format for python
-pickle_out = open(tmac_save_path + '.pkl', 'wb')
+pickle_out = open(tmac_save_path.with_suffix('.pkl'), 'wb')
 pickle.dump(trained_variables, pickle_out)
 pickle_out.close()
